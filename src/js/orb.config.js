@@ -79,6 +79,7 @@ function createfield(rootconfig, axetype, fieldconfig, defaultfieldconfig) {
     var merged = mergefieldconfigs(fieldconfig, fieldAxeconfig, axeconfig, defaultfieldconfig, rootconfig);
 
     return new Field({
+        data: getpropertyvalue('data', merged.configs, {}),
         name: getpropertyvalue('name', merged.configs, ''),
 
         caption: getpropertyvalue('caption', merged.configs, ''),
@@ -131,6 +132,8 @@ function SortConfig(options) {
 var Field = module.exports.field = function(options, createSubOptions) {
 
     options = options || {};
+
+    this.data = options.data;
 
     // field name
     this.name = options.name;
