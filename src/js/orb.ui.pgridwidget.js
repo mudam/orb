@@ -13,8 +13,6 @@ var pgrid = require('./orb.pgrid');
 var uiheaders = require('./orb.ui.header');
 var uirows = require('./orb.ui.rows');
 var uicols = require('./orb.ui.cols');
-//var React = require('react');
-var OrbReactComps = require('./react/orb.react.compiled');
 /**
  * Creates a new instance of pivot grid control
  * @class
@@ -24,9 +22,7 @@ var OrbReactComps = require('./react/orb.react.compiled');
 module.exports = function(config) {
 
     var self = this;
-    var renderElement;
     var pivotComponent;
-    var dialog = OrbReactComps.Dialog.create();
 
     /**
      * Parent pivot grid
@@ -158,16 +154,7 @@ module.exports = function(config) {
         pivotComponent.changeTheme(newTheme);
     };
 
-    this.render = function(element) {
-        renderElement = element;
-        if(renderElement) {
-            var pivotTableFactory = React.createFactory(OrbReactComps.PivotTable);
-            var pivottable = pivotTableFactory({
-                pgridwidget: self
-            });
-
-            pivotComponent = React.render(pivottable, element);
-        }
+    this.render = function() {
     };
 
     this.drilldown = function(dataCell, pivotId) {
@@ -192,24 +179,7 @@ module.exports = function(config) {
                 }
             }
 
-            var pivotStyle = window.getComputedStyle( pivotComponent.getDOMNode(), null );
-
-            dialog.show({
-                title: title,
-                comp: {
-                    type: OrbReactComps.Grid,
-                    props: {                    
-                        headers: self.pgrid.config.getDataSourceFieldCaptions(),
-                        data: data,
-                        theme: self.pgrid.config.theme
-                    }
-                },
-                theme: self.pgrid.config.theme,
-                style: {
-                    fontFamily: pivotStyle.getPropertyValue('font-family'),
-                    fontSize: pivotStyle.getPropertyValue('font-size')
-                }
-            });
+            dialog.show();
         }
     };
 
