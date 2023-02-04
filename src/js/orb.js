@@ -28,5 +28,6 @@
 
 module.exports.utils = require('./orb.utils');
 module.exports.pgrid = require('./orb.pgrid');
+module.exports.widget = require('./orb.ui.pgridwidget');
 module.exports.query = require('./orb.query');
 module.exports.export = require('./orb.export.excel');
